@@ -3,6 +3,7 @@ EXPORTS
     LoadLibraryW
     GetProcAddress
     GetSystemDirectoryW
+    GetModuleFileNameW
     DisableThreadLibraryCalls
     CreateThread
     Sleep

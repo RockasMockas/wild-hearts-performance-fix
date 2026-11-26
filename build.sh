@@ -117,4 +117,5 @@ echo "==> linking      ($OUT/dxgi.dll)"
 
 echo
 echo "Built $OUT/dxgi.dll ($(wc -c <"$OUT/dxgi.dll") bytes)"
-echo "Drop it next to the game executable to install the fix."
+echo "Install it next to the game executable, or as an OptiScaler plugin (./package.sh)."
+echo "See the README for both layouts."

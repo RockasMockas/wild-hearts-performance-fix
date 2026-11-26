@@ -23,6 +23,7 @@ typedef struct { DWORD dwSize, cntUsage, th32ThreadID, th32OwnerProcessID; LONG 
 API HMODULE LoadLibraryW(const WCHAR *);
 API void *GetProcAddress(HMODULE, const char *);
 API UINT GetSystemDirectoryW(WCHAR *, UINT);
+API UINT GetModuleFileNameW(HMODULE, WCHAR *, UINT);
 API BOOL DisableThreadLibraryCalls(HMODULE);
 API HANDLE CreateThread(void *, SIZE_T, DWORD (*)(void *), void *, DWORD, DWORD *);
 API void Sleep(DWORD);
@@ -45,7 +46,8 @@ API BOOL VirtualProtect(void *, SIZE_T, DWORD, DWORD *);
 #define FORWARDED(X) \
     X(ApplyCompatResolutionQuirking) X(CompatString) X(CompatValue) X(DXGID3D10CreateDevice) \
     X(DXGID3D10CreateLayeredDevice) X(DXGID3D10GetLayeredDeviceSize) X(DXGID3D10RegisterLayers) \
-    X(DXGIDeclareAdapterRemovalSupport) X(DXGIDumpJournal) X(DXGIGetDebugInterface1) \
+    X(DXGID3D10ETWRundown) X(DXGIDeclareAdapterRemovalSupport) X(DXGIDisableVBlankVirtualization) \
+    X(DXGIDumpJournal) X(DXGIGetDebugInterface1) \
     X(DXGIReportAdapterConfiguration) X(PIXBeginCapture) X(PIXEndCapture) X(PIXGetCaptureState) \
     X(SetAppCompatStringPointer) X(UpdateHMDEmulationStatus)
 #define HOOKED(X) X(CreateDXGIFactory) X(CreateDXGIFactory1) X(CreateDXGIFactory2)
@@ -202,22 +204,35 @@ static void update_priority_boost(void) {
 }
 
 static DWORD worker(void *unused) {
-    while (!g_renderThread) Sleep(500);
+    /* Process wide fixes apply even if the Present chain never forms, e.g. when
+       loaded as an OptiScaler plugin and another mod owns the swap chain. */
     SetPriorityClass(GetCurrentProcess(), HIGH_PRIORITY_CLASS);
     SetProcessPriorityBoost(GetCurrentProcess(), TRUE);
+    while (!g_renderThread) Sleep(500);
     for (;;) {
         update_priority_boost();
         Sleep(3000);
     }
 }
 
+static BOOL path_in_directory(const WCHAR *file, const WCHAR *directory, UINT length) {
+    for (UINT i = 0; i < length; i++) {
+        WCHAR a = file[i], b = directory[i];
+        if (a >= 'a' && a <= 'z') a -= 'a' - 'A';
+        if (b >= 'a' && b <= 'z') b -= 'a' - 'A';
+        if (a != b) return FALSE;
+    }
+    return file[length] == '\\';
+}
+
 static BOOL load_real_dxgi(void) {
-    WCHAR path[MAX_PATH + 16];
+    WCHAR path[MAX_PATH + 16], actual[MAX_PATH];
     UINT length = GetSystemDirectoryW(path, MAX_PATH);
     if (!length || length >= MAX_PATH) return FALSE;
     for (const WCHAR *name = L"\\dxgi.dll"; (path[length] = *name); length++, name++);
     HMODULE dxgi = LoadLibraryW(path);
     if (!dxgi) return FALSE;
+    if (!GetModuleFileNameW(dxgi, actual, MAX_PATH) || !path_in_directory(actual, path, length - 9)) return FALSE;
     FORWARDED(RESOLVE)
     HOOKED(REQUIRE)
     return TRUE;

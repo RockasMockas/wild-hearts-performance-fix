@@ -99,4 +99,4 @@ Invoke-Step 'linking' $link @(
 $size = (Get-Item -LiteralPath $dll).Length
 Write-Host ''
 Write-Host "Built $dll ($size bytes)"
-Write-Host 'Drop it next to the game executable to install the fix.'
+Write-Host 'Install it next to the game executable, or as an OptiScaler plugin - see the README.'

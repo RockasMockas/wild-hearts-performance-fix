@@ -19,3 +19,5 @@ EXPORTS
     DXGIDeclareAdapterRemovalSupport=Stub_DXGIDeclareAdapterRemovalSupport @17
     DXGIGetDebugInterface1=Stub_DXGIGetDebugInterface1 @18
     DXGIReportAdapterConfiguration=Stub_DXGIReportAdapterConfiguration @19
+    DXGID3D10ETWRundown=Stub_DXGID3D10ETWRundown @20
+    DXGIDisableVBlankVirtualization=Stub_DXGIDisableVBlankVirtualization @21

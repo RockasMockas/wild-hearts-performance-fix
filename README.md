@@ -11,6 +11,10 @@ Originally discovered by Angrevol.
 
 ## Install
 
+Pick **one** of the two options below, for most people simply use the standalone instructions (option A). Only use option B instructions if you are using OptiScaler.
+
+### Option A — Standalone (default)
+
 1. Download **`dxgi.dll`** from the [latest release](../../releases/latest).
 2. Put it in the folder that holds the game's `.exe`, next to it. For a default Steam
    install that is:
@@ -25,6 +29,31 @@ Originally discovered by Angrevol.
 
 **To uninstall:** delete `dxgi.dll` from that folder.
 
+### Option B — With OptiScaler
+
+[OptiScaler](https://github.com/optiscaler/OptiScaler) also installs itself as `dxgi.dll`, so this option moves hooks into Optiscaler's plugin system:
+
+1. Install OptiScaler as usual, with its own `dxgi.dll` next to the game `.exe`.
+2. Download the performance fix **`OptiScaler.zip`** from the [latest release](../../releases/latest) and
+   unzip it **into the game folder** (the one holding the `.exe`), so you end up with:
+
+   ```
+   <game folder>\dxgi.dll                     <- OptiScaler
+   <game folder>\OptiScaler\plugins\dxgi.dll  <- performance fix dll
+   ```
+
+3. Recommended: add the following to `OptiScaler.ini` in the game folder to make sure it is found:
+
+   ```ini
+   [Plugins]
+   Path = .\OptiScaler\plugins
+   ```
+
+4. Launch the game.
+
+**To uninstall:** delete `<game folder>\OptiScaler\plugins\dxgi.dll`. OptiScaler
+keeps working on its own.
+
 ## What The .dll Does
 
 By adding some small fixes on top of windows' `dxgi.dll` we have managed to
@@ -37,6 +66,10 @@ These include:
 - **disables** dynamic priority boosting for every thread except the render thread
 
 It changes no game files and doesn't require admin rights on your pc.
+
+The process wide parts take effect as soon as the dll loads. The render thread part
+kicks in once the game creates a swap chain, either directly or through OptiScaler
+when installed as in Option B.
 
 ## Building from source
 
@@ -60,6 +93,13 @@ You need [LLVM](https://releases.llvm.org/download.html) (`clang-cl`, `lld-link`
 
 Both produce `build/dxgi.dll`. Pass `-LLVMPath` / `LLVM=` if your toolchain is not in
 the usual place.
+
+## Release
+To stage what goes into a release(the standalone `dxgi.dll` plus the `OptiScaler.zip`):
+
+```sh
+./package.sh      # -> build/release/
+```
 
 ## Notes 
 

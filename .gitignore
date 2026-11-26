@@ -6,3 +6,7 @@ build/
 *.obj
 *.lib
 *.exe
+.pid*
+
+
+Opti*
