@@ -8,6 +8,8 @@ causing issues across the game threads.
 In short by simply adding some small fixes on top of windows' default `dxgi.dll` we have managed to
 drastically smooth out frame-time stutters/increase fps (without touching any game code at all).
 
+On our PCs we managed to go from barely being able to run the game, to turning everything up to high + game recording + discord screen share without having the game slow to an unplayable crawl.
+
 Originally discovered by Angrevol.
 
 ## Install
