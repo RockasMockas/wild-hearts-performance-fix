@@ -1,14 +1,14 @@
-# Wild Hearts Lag Fix
+# Wild Hearts Performance Fix
 
-Wild Hearts notoriously lags very heavily on PC due to a poorly optimized port.
+Wild Hearts notoriously stutters very heavily on PC compared to console editions.
 
-After having done some profiling, we found that the issue primarily stems from windows priority boost 
-causing issues across the game threads.
+After having done some profiling, we found that one of the main issues primarily stems from windows priority boost 
+causing stuttering across game threads.
 
 In short by simply adding some small fixes on top of windows' default `dxgi.dll` we have managed to
-drastically smooth out frame-time stutters/increase fps (without touching any game code at all).
+drastically smooth out frame-time stutters (without touching any game code at all).
 
-On our PCs we managed to go from barely being able to run the game, to turning everything up to high + game recording + discord screen share without having the game slow to an unplayable crawl.
+On our PCs we managed to go from barely being able to run the game, to turning everything up to high + game recording + discord screen share and have the game feel totally playable instead of a complete stuttering mess.
 
 Originally discovered by Angrevol.
 
