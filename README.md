@@ -5,10 +5,7 @@ Wild Hearts notoriously stutters very heavily on PC compared to console editions
 After having done some profiling, we found that one of the main issues primarily stems from windows priority boost 
 causing stuttering across game threads.
 
-In short by simply adding some small fixes on top of windows' default `dxgi.dll` we have managed to
-drastically smooth out frame-time stutters (without touching any game code at all).
-
-On our PCs we managed to go from barely being able to run the game, to turning everything up to high + game recording + discord screen share and have the game feel totally playable instead of a complete stuttering mess.
+By addressing this, we managed to go from barely being able to have a decent playable experience, to turning everything up to high + game recording + discord screen share and have the game feel totally playable instead of a complete stuttering mess.
 
 Originally discovered by Angrevol.
 
@@ -30,7 +27,10 @@ Originally discovered by Angrevol.
 
 ## What The .dll Does
 
-This dll:
+By adding some small fixes in `dxgi.dll` we have managed to
+drastically smooth out frame-time stutters (without touching any game code at all). 
+
+These include:
 
 - runs the main game process at **High** priority
 - runs the render thread at *Highest* priority
@@ -60,3 +60,7 @@ You need [LLVM](https://releases.llvm.org/download.html) (`clang-cl`, `lld-link`
 
 Both produce `build/dxgi.dll`. Pass `-LLVMPath` / `LLVM=` if your toolchain is not in
 the usual place.
+
+## Notes 
+
+This project is not affiliated with or endorsed by EA or Koei Tecmo.
