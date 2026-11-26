@@ -1,0 +1,8 @@
+# Build output
+build/
+
+# Compiled artifacts
+*.dll
+*.obj
+*.lib
+*.exe
