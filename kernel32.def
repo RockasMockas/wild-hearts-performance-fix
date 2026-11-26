@@ -1,0 +1,23 @@
+LIBRARY kernel32.dll
+EXPORTS
+    LoadLibraryW
+    GetProcAddress
+    GetSystemDirectoryW
+    DisableThreadLibraryCalls
+    CreateThread
+    Sleep
+    GetCurrentThreadId
+    GetCurrentProcessId
+    GetCurrentProcess
+    GetCurrentThread
+    SetPriorityClass
+    SetThreadPriority
+    SetThreadPriorityBoost
+    GetThreadPriorityBoost
+    SetProcessPriorityBoost
+    OpenThread
+    CloseHandle
+    CreateToolhelp32Snapshot
+    Thread32First
+    Thread32Next
+    VirtualProtect

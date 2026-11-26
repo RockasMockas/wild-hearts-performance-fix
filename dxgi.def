@@ -1,0 +1,21 @@
+LIBRARY dxgi
+EXPORTS
+    ApplyCompatResolutionQuirking=Stub_ApplyCompatResolutionQuirking @1
+    CompatString=Stub_CompatString @2
+    CompatValue=Stub_CompatValue @3
+    DXGIDumpJournal=Stub_DXGIDumpJournal @4
+    PIXBeginCapture=Stub_PIXBeginCapture @5
+    PIXEndCapture=Stub_PIXEndCapture @6
+    PIXGetCaptureState=Stub_PIXGetCaptureState @7
+    SetAppCompatStringPointer=Stub_SetAppCompatStringPointer @8
+    UpdateHMDEmulationStatus=Stub_UpdateHMDEmulationStatus @9
+    CreateDXGIFactory=My_CreateDXGIFactory @10
+    CreateDXGIFactory1=My_CreateDXGIFactory1 @11
+    CreateDXGIFactory2=My_CreateDXGIFactory2 @12
+    DXGID3D10CreateDevice=Stub_DXGID3D10CreateDevice @13
+    DXGID3D10CreateLayeredDevice=Stub_DXGID3D10CreateLayeredDevice @14
+    DXGID3D10GetLayeredDeviceSize=Stub_DXGID3D10GetLayeredDeviceSize @15
+    DXGID3D10RegisterLayers=Stub_DXGID3D10RegisterLayers @16
+    DXGIDeclareAdapterRemovalSupport=Stub_DXGIDeclareAdapterRemovalSupport @17
+    DXGIGetDebugInterface1=Stub_DXGIGetDebugInterface1 @18
+    DXGIReportAdapterConfiguration=Stub_DXGIReportAdapterConfiguration @19
