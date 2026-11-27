@@ -11,7 +11,7 @@ Originally discovered by Angrevol.
 
 ## Install
 
-Pick **one** of the two options below, for most people simply use the standalone instructions (option A). Only use option B instructions if you are using OptiScaler.
+Pick **one** of the two options below, for most people simply use the standalone instructions (option A). Only use option B instructions if you are using [OptiScaler](https://github.com/optiscaler/OptiScaler).
 
 ### Option A — Standalone (default)
 
@@ -25,15 +25,15 @@ Pick **one** of the two options below, for most people simply use the standalone
 
    (Otherwise in Steam, right-click **WILD HEARTS → Manage → Browse local
    files**, then look for the folder with the wild hearts `.exe`)
-3. Launch the game and it should automatically use the new `dxgi.dll` with the changes.
+3. Launch the game and it should automatically use the new `dxgi.dll` with the performance fixes.
 
 **To uninstall:** delete `dxgi.dll` from that folder.
 
 ### Option B — With OptiScaler
 
-[OptiScaler](https://github.com/optiscaler/OptiScaler) also installs itself as `dxgi.dll`, so this option moves hooks into Optiscaler's plugin system:
+[OptiScaler](https://github.com/optiscaler/OptiScaler) also installs itself as `dxgi.dll`, so instead we hook into Optiscaler's plugin system:
 
-1. Install OptiScaler as usual, with its own `dxgi.dll` next to the game `.exe`.
+1. Install [OptiScaler](https://github.com/optiscaler/OptiScaler) as usual, with its own `dxgi.dll` next to the game `.exe`.
 2. Download the performance fix **`OptiScaler.zip`** from the [latest release](../../releases/latest) and
    unzip it **into the game folder** (the one holding the `.exe`), so you end up with:
 
@@ -42,14 +42,14 @@ Pick **one** of the two options below, for most people simply use the standalone
    <game folder>\OptiScaler\plugins\dxgi.dll  <- performance fix dll
    ```
 
-3. Recommended: add the following to `OptiScaler.ini` in the game folder to make sure it is found:
+3. Add the following to `OptiScaler.ini` in the game folder to make sure the performance fix dll is found:
 
    ```ini
    [Plugins]
    Path = .\OptiScaler\plugins
    ```
 
-4. Launch the game.
+4. Launch the game. (Make sure you don't alter OptiScalar settings while in-game, as it will overwrite your `OptiScaler.ini`, and you will need to re-add the `[Plugins]` section in `OptiScaler.ini` again)
 
 **To uninstall:** delete `<game folder>\OptiScaler\plugins\dxgi.dll`. OptiScaler
 keeps working on its own.
