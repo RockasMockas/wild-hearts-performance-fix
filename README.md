@@ -49,7 +49,7 @@ Pick **one** of the two options below, for most people simply use the standalone
    Path = .\OptiScaler\plugins
    ```
 
-4. Launch the game. (Make sure you don't alter OptiScalar settings while in-game, as it will overwrite your `OptiScaler.ini`, and you will need to re-add the `[Plugins]` section in `OptiScaler.ini` again)
+4. Launch the game.
 
 **To uninstall:** delete `<game folder>\OptiScaler\plugins\dxgi.dll`. OptiScaler
 keeps working on its own.
