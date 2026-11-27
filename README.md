@@ -57,7 +57,7 @@ keeps working on its own.
 ## What The .dll Does
 
 By adding some small fixes on top of windows' `dxgi.dll` we have managed to
-drastically smooth out frame-time stutters (without touching any game code at all). 
+drastically smooth out CPU-based frame-time stutters (without touching any game code at all). 
 
 These include:
 
@@ -66,10 +66,6 @@ These include:
 - **disables** dynamic priority boosting for every thread except the render thread
 
 It changes no game files and doesn't require admin rights on your pc.
-
-The process wide parts take effect as soon as the dll loads. The render thread part
-kicks in once the game creates a swap chain, either directly or through OptiScaler
-when installed as in Option B.
 
 ## Building from source
 
